@@ -27,7 +27,34 @@
  * Please go through this lesson: https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/
  */
 function parseStory(rawStory) {
-  // Your code here.
+  
+  let newArr = []
+  const nReg = new RegExp('[\[n\]]')
+  const vReg = new RegExp('[\[v\]]')
+  const aReg = new RegExp('[\[a\]]')
+
+  let arrayStory = rawStory.split(" ")
+  for (let i = 0; i < arrayStory.length; i++) {
+    let obj = { word: "", pos: "" }
+    if (nReg.test(arrayStory[i])) {
+      obj.word = arrayStory[i].slice(0, -3)
+      obj.pos = "noun"
+      newArr.push(obj)
+    } else if (vReg.test(arrayStory[i])) {
+      obj.word = arrayStory[i].slice(0, -3)
+      obj.pos = "verb"
+      newArr.push(obj)
+    } else if (aReg.test(arrayStory[i])) {
+      obj.word = arrayStory[i].slice(0, -3)
+      obj.pos = "adjective"
+      newArr.push(obj)
+    } else {
+      obj.word = arrayStory[i]
+      delete obj.pos
+      newArr.push(obj)
+    }
+  }
+  console.log(newArr);
   return {}; // This line is currently wrong :)
 }
 
