@@ -27,29 +27,42 @@
  * Please go through this lesson: https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/
  */
 function parseStory(rawStory) {
-  
+
   let newArr = []
+  let array = rawStory.split(" ")
+  let storyArray = []
+
   const nReg = new RegExp('[\[n\]]')
   const vReg = new RegExp('[\[v\]]')
   const aReg = new RegExp('[\[a\]]')
 
-  let arrayStory = rawStory.split(" ")
-  for (let i = 0; i < arrayStory.length; i++) {
+  for (let j = 0; j < array.length; j++) {
+
+    if (array[j].slice(-1) === "." || array[j].slice(-1) === ",") {
+
+      storyArray.push(array[j].slice(0, array[j].length - 1), array[j].slice(-1))
+    } else {
+      storyArray.push(array[j])
+    }
+  }
+
+
+  for (let i = 0; i < storyArray.length; i++) {
     let obj = { word: "", pos: "" }
-    if (nReg.test(arrayStory[i])) {
-      obj.word = arrayStory[i].slice(0, -3)
+    if (nReg.test(storyArray[i])) {
+      obj.word = storyArray[i].slice(0, -3)
       obj.pos = "noun"
       newArr.push(obj)
-    } else if (vReg.test(arrayStory[i])) {
-      obj.word = arrayStory[i].slice(0, -3)
+    } else if (vReg.test(storyArray[i])) {
+      obj.word = storyArray[i].slice(0, -3)
       obj.pos = "verb"
       newArr.push(obj)
-    } else if (aReg.test(arrayStory[i])) {
-      obj.word = arrayStory[i].slice(0, -3)
+    } else if (aReg.test(storyArray[i])) {
+      obj.word = storyArray[i].slice(0, -3)
       obj.pos = "adjective"
       newArr.push(obj)
     } else {
-      obj.word = arrayStory[i]
+      obj.word = storyArray[i]
       delete obj.pos
       newArr.push(obj)
     }
