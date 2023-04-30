@@ -51,15 +51,15 @@ function parseStory(rawStory) {
     let obj = { word: "", pos: "" }
     if (nReg.test(storyArray[i])) {
       obj.word = storyArray[i].slice(0, -3)
-      obj.pos = "noun"
+      obj.pos = "Noun"
       newArr.push(obj)
     } else if (vReg.test(storyArray[i])) {
       obj.word = storyArray[i].slice(0, -3)
-      obj.pos = "verb"
+      obj.pos = "Verb"
       newArr.push(obj)
     } else if (aReg.test(storyArray[i])) {
       obj.word = storyArray[i].slice(0, -3)
-      obj.pos = "adjective"
+      obj.pos = "Adjective"
       newArr.push(obj)
     } else {
       obj.word = storyArray[i]
@@ -67,6 +67,41 @@ function parseStory(rawStory) {
       newArr.push(obj)
     }
   }
+
+  ////////////////////////////////////////////////////////////////////
+
+  const madLibsEdit = document.querySelector(".madLibsEdit")
+  const madLibsPreview = document.querySelector(".madLibsPreview")
+
+  for (let index = 0; index < newArr.length; index++) {
+
+    if (newArr[index].pos !== undefined) {
+
+      madLibsEdit.innerHTML = madLibsEdit.innerHTML + ` <input placeholder="${newArr[index].pos}"></input>`
+      madLibsPreview.innerHTML = madLibsPreview.innerHTML + ` <span></span>`
+    } else if (newArr[index].word === "." || newArr[index].word === ",") {
+      madLibsEdit.innerHTML = madLibsEdit.innerHTML + `${newArr[index].word}`
+      madLibsPreview.innerHTML = madLibsPreview.innerHTML + `${newArr[index].word}`
+    } else {
+      madLibsEdit.innerHTML = madLibsEdit.innerHTML + ` ${newArr[index].word}`
+      madLibsPreview.innerHTML = madLibsPreview.innerHTML + ` ${newArr[index].word}`
+    }
+  }
+  ///////////////////////////////////////////////////////////////////////
+
+  const inputsArr = document.querySelectorAll("input")
+  const pArr = document.querySelectorAll("span")
+  
+  window.addEventListener("keyup", () => {
+
+    for (let index = 0; index < pArr.length; index++) {
+
+      pArr[index].innerHTML = inputsArr[index].value
+
+    }
+  })
+  //////////////////////////////////////////////////////////////////////
+
   console.log(newArr);
   return {}; // This line is currently wrong :)
 }
