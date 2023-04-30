@@ -72,12 +72,25 @@ function parseStory(rawStory) {
 
   const madLibsEdit = document.querySelector(".madLibsEdit")
   const madLibsPreview = document.querySelector(".madLibsPreview")
+  const body = document.querySelector("body")
+  const header = document.createElement("h1")
+  const subHeader = document.createElement("h2")
+  const edit = document.createElement("h3")
+  const preview = document.createElement("h3")
+  header.innerHTML = `Mad Libs`
+  subHeader.innerHTML = `The Witcher Edition`
+  edit.innerHTML = `Edit`
+  preview.innerHTML = `Preview`
+  body.insertBefore(header, body.firstChild)
+  body.insertBefore(subHeader, body.firstChild.nextSibling)
+  madLibsEdit.appendChild(edit)
+  madLibsPreview.appendChild(preview)
 
   for (let index = 0; index < newArr.length; index++) {
 
     if (newArr[index].pos !== undefined) {
 
-      madLibsEdit.innerHTML = madLibsEdit.innerHTML + ` <input placeholder="${newArr[index].pos}"></input>`
+      madLibsEdit.innerHTML = madLibsEdit.innerHTML + ` <input maxlength="20" placeholder="${newArr[index].pos}"></input>`
       madLibsPreview.innerHTML = madLibsPreview.innerHTML + ` <span></span>`
     } else if (newArr[index].word === "." || newArr[index].word === ",") {
       madLibsEdit.innerHTML = madLibsEdit.innerHTML + `${newArr[index].word}`
@@ -91,7 +104,7 @@ function parseStory(rawStory) {
 
   const inputsArr = document.querySelectorAll("input")
   const pArr = document.querySelectorAll("span")
-  
+
   window.addEventListener("keyup", () => {
 
     for (let index = 0; index < pArr.length; index++) {
@@ -101,9 +114,7 @@ function parseStory(rawStory) {
     }
   })
   //////////////////////////////////////////////////////////////////////
-
-  console.log(newArr);
-  return {}; // This line is currently wrong :)
+  return { newArr }; // This line is currently wrong :)
 }
 
 /**
