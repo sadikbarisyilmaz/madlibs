@@ -105,6 +105,13 @@ function parseStory(rawStory) {
   const inputsArr = document.querySelectorAll("input")
   const pArr = document.querySelectorAll("span")
 
+  for (let i = 0; i < inputsArr.length; i++) {
+    inputsArr[i].value = localStorage.getItem(`${[i]}`)
+    if (inputsArr[i].value !== "") {
+      inputsArr[i].style.color = "rgb(140, 0, 0)"
+    }
+  }
+  
   window.addEventListener("keyup", () => {
 
     for (let index = 0; index < pArr.length; index++) {
@@ -112,7 +119,11 @@ function parseStory(rawStory) {
       pArr[index].innerHTML = inputsArr[index].value
 
     }
+    for (let i = 0; i < inputsArr.length; i++) {
+      localStorage.setItem(`${[i]}`, `${inputsArr[i].value}`)
+    }
   })
+
   //////////////////////////////////////////////////////////////////////
 
   inputsArr.forEach(x => {
@@ -132,7 +143,7 @@ function parseStory(rawStory) {
       }
     })
   })
-///////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
   return { newArr }; // This line is currently wrong :)
 }
 
