@@ -42,6 +42,12 @@ input {
     font-family: myFont;
 }
 
+input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgb(121, 0, 0);
+
+}
+
 input::placeholder {
     font-family: myFont;
     font-weight: 200;
@@ -58,7 +64,10 @@ span {
     display: inline-block;
     border-bottom: 1px solid white;
     text-align: center;
+}
 
+span:before{
+    content: "\00a0";
 }
 
 h1 {

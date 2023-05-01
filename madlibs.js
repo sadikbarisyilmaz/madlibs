@@ -114,6 +114,25 @@ function parseStory(rawStory) {
     }
   })
   //////////////////////////////////////////////////////////////////////
+
+  inputsArr.forEach(x => {
+    x.addEventListener("blur", () => {
+      if (x.value !== "") {
+        x.style.color = "rgb(140, 0, 0)"
+      }
+    })
+    x.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        const currentInput = document.activeElement;
+        for (let i = 0; i < inputsArr.length; i++) {
+          if (inputsArr[i] === currentInput && i !== inputsArr.length - 1) {
+            inputsArr[i + 1].focus()
+          }
+        }
+      }
+    })
+  })
+///////////////////////////////////////////////////////////////////////////////
   return { newArr }; // This line is currently wrong :)
 }
 
