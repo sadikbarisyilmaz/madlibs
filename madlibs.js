@@ -107,6 +107,7 @@ function parseStory(rawStory) {
 
   for (let i = 0; i < inputsArr.length; i++) {
     inputsArr[i].value = localStorage.getItem(`${[i]}`)
+    pArr[i].innerHTML = localStorage.getItem(`${[i]}`)
     if (inputsArr[i].value !== "") {
       inputsArr[i].style.color = "rgb(140, 0, 0)"
     }
